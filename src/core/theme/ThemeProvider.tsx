@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { ThemeContext } from "../contexts";
+import { ThemeContext } from "./ThemeContext";
 
 import { colors, text } from "~/ui";
 
