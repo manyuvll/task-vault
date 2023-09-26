@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "date-fns": "^2.30.0",
     "expo": "~49.0.11",
     "expo-constants": "~14.4.2",
     "expo-linking": "~5.0.2",

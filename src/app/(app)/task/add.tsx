@@ -1,18 +1,12 @@
-import { SafeAreaView, Text } from "react-native";
+import React from "react";
+import { SafeAreaView } from "react-native";
 
-import { useAuth } from "~/core/auth";
+import { Daypicker } from "~/ui/core/daypicker/daypicker";
 
 export default function Page() {
-  const { signOut } = useAuth();
   return (
     <SafeAreaView>
-      <Text
-        onPress={() => {
-          signOut();
-        }}
-      >
-        ADD
-      </Text>
+      <Daypicker />
     </SafeAreaView>
   );
 }
