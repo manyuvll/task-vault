@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { defaultTheme } from "./ThemeProvider";
+import { defaultTheme } from "./providers";
 
 type ThemeType = typeof defaultTheme;
 
