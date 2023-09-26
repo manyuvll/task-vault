@@ -1,12 +1,9 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Redirect, Slot, Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import React from "react";
-import { Platform, SafeAreaView, View } from "react-native";
-
-import Page from ".";
 
 import { useAuth } from "~/core/auth";
-import { Add, Item, colors, shadows } from "~/ui";
+import { Add, Item, colors } from "~/ui";
 
 export default function AppLayout() {
   const { session } = useAuth();
@@ -27,7 +24,7 @@ export default function AppLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "",
+          tabBarShowLabel: false,
           tabBarIcon: ({ focused }: { focused: boolean }) => (
             <Item
               label="home"
@@ -48,7 +45,7 @@ export default function AppLayout() {
       <Tabs.Screen
         name="task/add"
         options={{
-          title: "",
+          tabBarShowLabel: false,
           tabBarIcon: ({ focused }: { focused: boolean }) => (
             <Add focused={focused} />
           ),
@@ -57,7 +54,7 @@ export default function AppLayout() {
       <Tabs.Screen
         name="task/list"
         options={{
-          title: "",
+          tabBarShowLabel: false,
           tabBarIcon: ({ focused }: { focused: boolean }) => (
             <Item
               label="List"
