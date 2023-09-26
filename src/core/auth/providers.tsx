@@ -3,7 +3,7 @@ import { AuthProviderProps } from "./types";
 import { useStorageState } from "../secureStore";
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [session, setSession, isLoading] = useStorageState("session");
+  const [session, setSession] = useStorageState("session");
 
   return (
     <AuthContext.Provider
@@ -15,7 +15,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
           return setSession(null);
         },
         session,
-        isLoading,
       }}
     >
       {children}

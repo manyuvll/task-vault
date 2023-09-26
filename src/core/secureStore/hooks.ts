@@ -3,13 +3,11 @@ import React from "react";
 import { Platform } from "react-native";
 
 import { setStorageItemAsync } from "./helpers";
-import { useBoolean } from "../hooks/useBoolean";
 
 export function useStorageState(
   key: string,
-): [string | null, (value: string | null) => Promise<void>, boolean] {
+): [string | null, (value: string | null) => Promise<void>] {
   const [state, setState] = React.useState<string | null>(null);
-  const [isLoading, setIsLoading] = useBoolean(false);
 
   React.useEffect(() => {
     if (Platform.OS === "web") {
@@ -33,16 +31,10 @@ export function useStorageState(
       // not doing this will make the app be redirected back to sign-in page
       return new Promise(async (resolve, reject) => {
         try {
-          setIsLoading.on();
           setStorageItemAsync(key, value).then(() => {
             setState(value ?? null);
-            // simulate network delay to show
-            // how I would manage small apps loadings
-            setTimeout(() => {
-              setIsLoading.off();
-              // Resolve the Promise when the storage operation is complete.
-              resolve();
-            }, 500);
+            // Resolve the Promise when the storage operation is complete.
+            resolve();
           });
         } catch (error) {
           // Handle any errors that occurred during the storage operation.
@@ -54,5 +46,5 @@ export function useStorageState(
     [key],
   );
 
-  return [state, setValue, isLoading];
+  return [state, setValue];
 }

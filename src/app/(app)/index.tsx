@@ -1,7 +1,4 @@
-import { router } from "expo-router";
-import { Button, Text, View } from "react-native";
-
-import signIn from "../sign-in";
+import { Text, View } from "react-native";
 
 import { useAuth } from "~/core/auth";
 

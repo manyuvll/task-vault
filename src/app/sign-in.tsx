@@ -6,21 +6,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import SignInIllustration from "../../assets/sign-in-illustration-2.svg";
 
-import { useTheme } from "~/core";
+import { useBiometricAuth, useTheme } from "~/core";
 import { useAuth } from "~/core/auth";
 import { Button, colors } from "~/ui";
 
 export default function SignIn() {
-  const { signIn, isLoading } = useAuth();
+  const { signIn } = useAuth();
   const { text } = useTheme();
-
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
+  const [isBioAuthAvailable, bioAuth] = useBiometricAuth();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -48,7 +41,6 @@ export default function SignIn() {
           <Text style={{ ...(text.giant as object) }}>
             Innovative {"\n"}Task{" "}
             <Text style={{ color: colors.indigo[500] }}>Vault</Text>
-            {/* <Text style={{ color: colors.blue[500] }}>Vault</Text> */}
           </Text>
           <Text style={text.body}>Keep your life goals secure!</Text>
         </View>
@@ -58,10 +50,19 @@ export default function SignIn() {
         >
           <Button
             title="Sign In with Face ID"
-            onPress={() => {
-              signIn("user-session-2").then(() => {
-                router.replace("/");
-              });
+            onPress={async () => {
+              if (isBioAuthAvailable) {
+                bioAuth().then((biometricResult) => {
+                  console.log(biometricResult.success);
+                  if (biometricResult.success) {
+                    signIn("user-session-2").then(() => {
+                      router.replace("/");
+                    });
+                  } else {
+                    console.log("fail");
+                  }
+                });
+              }
             }}
             rightIcon={<Ionicons name="scan-circle" size={30} color="white" />}
           />
