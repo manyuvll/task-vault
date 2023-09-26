@@ -4,9 +4,11 @@ import React from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import SignInIllustration from "../../assets/sign-in-illustration-2.svg";
+
 import { useTheme } from "~/core";
 import { useAuth } from "~/core/auth";
-import { Button } from "~/ui";
+import { Button, colors } from "~/ui";
 
 export default function SignIn() {
   const { signIn, isLoading } = useAuth();
@@ -22,28 +24,37 @@ export default function SignIn() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <SignInIllustration
+        width={430}
+        height={500}
+        style={{ position: "absolute", top: 60 }}
+      />
       <View
         style={{
           flex: 1,
           justifyContent: "space-between",
-          gap: 50,
+          gap: 40,
         }}
       >
         <View
           style={{
             flex: 4,
-            gap: 16,
+            gap: 8,
             display: "flex",
             justifyContent: "flex-end",
             alignItems: "center",
           }}
         >
-          <Text style={text.giant}>Convenient task manager</Text>
-          <Text style={text.body}>Keep healthy work-life balance!</Text>
+          <Text style={{ ...(text.giant as object) }}>
+            Innovative {"\n"}Task{" "}
+            <Text style={{ color: colors.indigo[500] }}>Vault</Text>
+            {/* <Text style={{ color: colors.blue[500] }}>Vault</Text> */}
+          </Text>
+          <Text style={text.body}>Keep your life goals secure!</Text>
         </View>
 
         <View
-          style={{ flex: 1, paddingHorizontal: 40, justifyContent: "center" }}
+          style={{ flex: 1, paddingHorizontal: 34, justifyContent: "center" }}
         >
           <Button
             title="Sign In with Face ID"

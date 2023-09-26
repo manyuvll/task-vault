@@ -33,14 +33,23 @@ const getVariant = (variant: Variant) => {
       return StyleSheet.create({
         button: {
           flexDirection: "row",
-          gap: 4,
+          gap: 8,
           alignItems: "center",
           justifyContent: "center",
           paddingVertical: 12,
           paddingHorizontal: 32,
-          borderRadius: 14,
-          elevation: 3,
-          backgroundColor: colors.blue[500],
+          borderRadius: 99,
+          backgroundColor: colors.indigo[500],
+
+          shadowColor: colors.indigo[500],
+          shadowOffset: {
+            width: 0,
+            height: 7,
+          },
+          shadowOpacity: 0.43,
+          shadowRadius: 9.51,
+
+          elevation: 15,
         },
         text: {
           width: "auto",
