@@ -1,19 +1,18 @@
 import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAuth } from "~/core/auth";
 
 export default function Page() {
   const { signOut } = useAuth();
   return (
-    <SafeAreaView>
+    <View>
       <Text
         onPress={() => {
           signOut();
         }}
       >
-        HOME
+        LIST
       </Text>
-    </SafeAreaView>
+    </View>
   );
 }

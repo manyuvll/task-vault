@@ -1,3 +1,3 @@
-import { Button } from "./button";
-
-export { Button };
+export * from "./button";
+export * from "./navbar";
+export * from "./tabs";
