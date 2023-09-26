@@ -22,6 +22,7 @@ const Item = ({ label, icon, focused }: ItemProps) => {
         style={{
           fontFamily: "Roboto",
           fontSize: 12,
+          color: focused ? colors.indigo[500] : colors.slate[500],
         }}
       >
         {label}

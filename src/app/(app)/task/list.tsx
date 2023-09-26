@@ -1,11 +1,11 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, Text } from "react-native";
 
 import { useAuth } from "~/core/auth";
 
 export default function Page() {
   const { signOut } = useAuth();
   return (
-    <View>
+    <SafeAreaView>
       <Text
         onPress={() => {
           signOut();
@@ -13,6 +13,6 @@ export default function Page() {
       >
         LIST
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }

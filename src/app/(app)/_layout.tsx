@@ -6,8 +6,7 @@ import { Platform, SafeAreaView, View } from "react-native";
 import Page from ".";
 
 import { useAuth } from "~/core/auth";
-import { Item, Navbar, colors, shadows } from "~/ui";
-import { NavbarItem } from "~/ui/core/navbar/navbarItem";
+import { Add, Item, colors, shadows } from "~/ui";
 
 export default function AppLayout() {
   const { session } = useAuth();
@@ -29,81 +28,51 @@ export default function AppLayout() {
         name="index"
         options={{
           title: "",
-          tabBarIcon: ({ focused }: { focused: boolean }) => {
-            return (
-              <Item
-                label="home"
-                focused={focused}
-                icon={
-                  <Ionicons
-                    name="home-outline"
-                    // style={{ color: colors.indigo[200] }}
-                    size={20}
-                  />
-                }
-              />
-            );
-          },
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
+            <Item
+              label="home"
+              focused={focused}
+              icon={
+                <Ionicons
+                  name="home-outline"
+                  size={20}
+                  style={{
+                    color: focused ? colors.indigo[500] : colors.slate[500],
+                  }}
+                />
+              }
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="task/add"
         options={{
           title: "",
-          tabBarIcon: ({ focused }: { focused: boolean }) => {
-            return (
-              <View
-                style={{
-                  backgroundColor: colors.indigo[100],
-                  borderColor: colors.indigo[100],
-                  borderWidth: 10,
-                  width: 140,
-                  borderRadius: 50,
-                  top: Platform.OS === "ios" ? -10 : -20,
-                }}
-              >
-                <View
-                  style={{
-                    width: 120,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: colors.indigo[500],
-                    height: Platform.OS === "ios" ? 50 : 60,
-                    borderRadius: Platform.OS === "ios" ? 25 : 30,
-                    shadowColor: colors.indigo[500],
-                    ...shadows.default,
-                  }}
-                >
-                  <Ionicons
-                    name="add"
-                    style={{ color: colors.white }}
-                    size={30}
-                  />
-                </View>
-              </View>
-            );
-          },
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
+            <Add focused={focused} />
+          ),
         }}
       />
       <Tabs.Screen
         name="task/list"
         options={{
           title: "",
-          tabBarIcon: ({ focused }: { focused: boolean }) => {
-            return (
-              <Item
-                label="List"
-                focused={focused}
-                icon={
-                  <Ionicons
-                    name="list-circle-outline"
-                    // style={{ color: colors.indigo[200] }}
-                    size={20}
-                  />
-                }
-              />
-            );
-          },
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
+            <Item
+              label="List"
+              focused={focused}
+              icon={
+                <Ionicons
+                  name="list-circle-outline"
+                  size={20}
+                  style={{
+                    color: focused ? colors.indigo[500] : colors.slate[500],
+                  }}
+                />
+              }
+            />
+          ),
         }}
       />
     </Tabs>
