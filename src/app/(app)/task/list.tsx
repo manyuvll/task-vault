@@ -2,7 +2,7 @@ import { SafeAreaView, Text } from "react-native";
 
 import { useAppDispatch } from "~/core/hooks/useAppDispatch";
 import { useAppSelector } from "~/core/hooks/useAppSelector";
-import { addTask, deleteTask } from "~/screens";
+import { List, addTask, deleteTask } from "~/screens";
 import { Header } from "~/ui";
 
 export default function Page() {
@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <SafeAreaView>
       <Header title="Task List" />
-      <Text onPress={() => console.log(task)}>List</Text>
+      {/* <Text onPress={() => console.log(task)}>List</Text>
       <Text
         onPress={() =>
           dispatch(
@@ -27,7 +27,8 @@ export default function Page() {
       >
         Add
       </Text>
-      <Text onPress={() => dispatch(deleteTask("ddjns"))}>Delete</Text>
+      <Text onPress={() => dispatch(deleteTask("ddjns"))}>Delete</Text> */}
+      <List />
     </SafeAreaView>
   );
 }

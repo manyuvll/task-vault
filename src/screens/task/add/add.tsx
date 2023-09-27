@@ -29,7 +29,6 @@ export const Add = () => {
   } = useForm<AddTaskForm>({
     defaultValues: {
       label: "",
-      description: "",
       date: new Date(),
     },
   });
@@ -62,27 +61,6 @@ export const Add = () => {
           />
         )}
         name="label"
-      />
-
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <Input
-            label="Task description"
-            placeholder="Add a description"
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            editable
-            multiline
-            numberOfLines={14}
-            requiredMessage={errors.description ? "This is required." : null}
-          />
-        )}
-        name="description"
       />
 
       <Controller
