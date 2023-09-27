@@ -21,7 +21,7 @@ export const Header = ({ title }: HeaderProps) => {
         paddingHorizontal: 20,
         justifyContent: "space-between",
         height: 40,
-        marginBottom: 30,
+        marginBottom: 20,
       }}
     >
       <View

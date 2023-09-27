@@ -29,4 +29,12 @@ export const text = {
     fontWeight: "600",
     color: colors.slate[500],
   } as StyleProp<TextStyle>,
+  validationError: {
+    fontFamily: "Roboto",
+    fontSize: 12,
+    lineHeight: 24,
+    letterSpacing: 0.4,
+    fontWeight: "600",
+    color: colors.red[500],
+  } as StyleProp<TextStyle>,
 };
