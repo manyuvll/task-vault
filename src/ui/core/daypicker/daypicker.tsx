@@ -63,6 +63,7 @@ const Daypicker = () => {
           borderRadius: 18,
           flexDirection: "row",
           gap: 10,
+          overflow: "visible",
           // ...shadows.default,
         }}
       >

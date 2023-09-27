@@ -30,8 +30,9 @@ const Day = ({
         marginHorizontal: 4,
         gap: 6,
         backgroundColor: isSelected ? colors.indigo[500] : colors.blue[50],
+        zIndex: 4,
         shadowColor: colors.indigo[500],
-        ...shadows.elevated,
+        ...shadows[isSelected ? "default" : "elevated"],
       }}
     >
       <Text

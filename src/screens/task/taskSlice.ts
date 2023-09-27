@@ -32,7 +32,7 @@ const taskSlice = createSlice({
         }),
       };
     },
-    completeTask: (state, action: PayloadAction<string>) => {
+    toggleCompletedTask: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         taskList: state.taskList.map((task) => {
@@ -41,7 +41,7 @@ const taskSlice = createSlice({
           }
           return {
             ...task,
-            completed: true,
+            completed: !task.completed,
           };
         }),
       };
@@ -51,6 +51,11 @@ const taskSlice = createSlice({
     },
   },
 });
-export const { addTask, deleteTask, editTask, completeTask, clearStore } =
-  taskSlice.actions;
+export const {
+  addTask,
+  deleteTask,
+  editTask,
+  toggleCompletedTask,
+  clearStore,
+} = taskSlice.actions;
 export const taskReducer = taskSlice.reducer;
