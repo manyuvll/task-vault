@@ -2,7 +2,7 @@ import { format, isWeekend, isSameDay, getDate } from "date-fns";
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
-import { colors } from "~/ui/themes";
+import { colors, shadows } from "~/ui/themes";
 
 export const DAY_WIDTH = 50;
 
@@ -24,10 +24,14 @@ const Day = ({
       style={{
         justifyContent: "center",
         alignItems: "center",
-        height: 50,
+        height: 70,
         width: DAY_WIDTH,
-        borderRadius: 8,
-        backgroundColor: isSelected ? colors.indigo[500] : colors.white,
+        borderRadius: 16,
+        marginHorizontal: 4,
+        gap: 6,
+        backgroundColor: isSelected ? colors.indigo[500] : colors.blue[50],
+        shadowColor: colors.indigo[500],
+        ...shadows.elevated,
       }}
     >
       <Text
@@ -35,9 +39,10 @@ const Day = ({
           color: isSelected
             ? colors.white
             : isWeekend(date)
-            ? colors.red[500]
-            : colors.slate[900],
+            ? colors.red[400]
+            : colors.slate[400],
           fontWeight: "600",
+          fontSize: 12,
         }}
       >
         {format(date, "iii")}
@@ -46,6 +51,7 @@ const Day = ({
         style={{
           color: isSelected ? colors.white : colors.slate[900],
           fontWeight: "600",
+          fontSize: 26,
         }}
       >
         {getDate(date)}

@@ -1,20 +1,26 @@
 import { subDays, addDays } from "date-fns";
-import React, { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 
 import { DAY_WIDTH, Day } from "./day";
+import { formatMonth } from "./helpers";
 
-import { colors, shadows } from "~/ui/themes";
+import { text } from "~/ui/themes";
 
 const DAY_PICKER_RANGE = 30;
 
 const Daypicker = () => {
   const today = new Date();
   const [selectedDay, setSelectedDay] = useState(today);
+  const startOfDaypickerRange = useRef(subDays(today, DAY_PICKER_RANGE / 2));
 
   const [dates, setDates] = useState<Date[]>([]);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [currentMonth, setCurrentMonth] = useState();
+
+  const getCurrentScrolledMonth = useMemo(
+    () => formatMonth(startOfDaypickerRange.current, scrollPosition, DAY_WIDTH),
+    [scrollPosition],
+  );
 
   // the current day is at the middle of the range
   // multiplying by the width of each square will move us
@@ -25,7 +31,7 @@ const Daypicker = () => {
   };
 
   const getDates = (today: Date) => {
-    let current = subDays(today, DAY_PICKER_RANGE / 2);
+    let current = today;
     const _dates = [];
     // we add days until we reach the end date we set
     // improvement is to dynamically load next and previous
@@ -38,35 +44,38 @@ const Daypicker = () => {
   };
 
   useEffect(() => {
-    getDates(today);
+    getDates(startOfDaypickerRange.current);
   }, []);
 
   return (
-    <ScrollView
-      contentOffset={todayScrollOffset}
-      horizontal
-      pagingEnabled
-      showsHorizontalScrollIndicator={false}
-      onScroll={(e) => setScrollPosition(e.nativeEvent.contentOffset.x)}
-      style={{
-        backgroundColor: colors.white,
-        marginHorizontal: 20,
-        padding: 6,
-        borderRadius: 18,
-        flexDirection: "row",
-        gap: 4,
-        ...shadows.default,
-      }}
-    >
-      {dates.map((date) => (
-        <Day
-          key={date.toString()}
-          selected={selectedDay}
-          date={date}
-          onSelectDate={setSelectedDay}
-        />
-      ))}
-    </ScrollView>
+    <View style={{ alignItems: "center", gap: 4 }}>
+      <Text style={text.heading}>{getCurrentScrolledMonth}</Text>
+      <ScrollView
+        contentOffset={todayScrollOffset}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        scrollEventThrottle={100}
+        onScroll={(e) => setScrollPosition(e.nativeEvent.contentOffset.x)}
+        style={{
+          // backgroundColor: colors.white,
+          padding: 6,
+          borderRadius: 18,
+          flexDirection: "row",
+          gap: 10,
+          // ...shadows.default,
+        }}
+      >
+        {dates.map((date) => (
+          <Day
+            key={date.toString()}
+            selected={selectedDay}
+            date={date}
+            onSelectDate={setSelectedDay}
+          />
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 

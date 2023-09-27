@@ -53,13 +53,10 @@ export default function SignIn() {
             onPress={async () => {
               if (isBioAuthAvailable) {
                 bioAuth().then((biometricResult) => {
-                  console.log(biometricResult.success);
                   if (biometricResult.success) {
                     signIn("user-session-2").then(() => {
                       router.replace("/");
                     });
-                  } else {
-                    console.log("fail");
                   }
                 });
               }

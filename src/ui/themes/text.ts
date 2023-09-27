@@ -9,9 +9,16 @@ export const text = {
     fontWeight: "700",
     color: colors.slate[700],
   } as StyleProp<TextStyle>,
+  pageHeading: {
+    fontSize: 24,
+    lineHeight: 28,
+    fontWeight: "700",
+    color: colors.slate[700],
+  } as StyleProp<TextStyle>,
   heading: {
     fontSize: 20,
     lineHeight: 28,
+    fontWeight: "500",
     color: colors.slate[700],
   } as StyleProp<TextStyle>,
   body: {

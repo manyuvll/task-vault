@@ -14,10 +14,7 @@ const useBiometricAuth = (): [
   });
 
   const bioAuth = () => {
-    return LocalAuthentication.authenticateAsync({
-      // promptMessage: "YOOOOO",
-      // fallbackLabel: "WOOOO",
-    });
+    return LocalAuthentication.authenticateAsync();
   };
 
   return [isBiometricAvailable, bioAuth];

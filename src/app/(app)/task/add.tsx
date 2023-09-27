@@ -1,12 +1,14 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
 
-import { Daypicker } from "~/ui/core/daypicker/daypicker";
+import { Add } from "~/screens";
+import { Header } from "~/ui";
 
 export default function Page() {
   return (
     <SafeAreaView>
-      <Daypicker />
+      <Header title="Add a Task" />
+      <Add />
     </SafeAreaView>
   );
 }

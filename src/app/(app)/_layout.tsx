@@ -16,6 +16,7 @@ export default function AppLayout() {
 
   return (
     <Tabs
+      backBehavior="history"
       sceneContainerStyle={{ backgroundColor: colors.indigo[100] }}
       screenOptions={{
         headerShown: false,
