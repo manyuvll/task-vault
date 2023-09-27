@@ -3,14 +3,14 @@ import Checkbox from "expo-checkbox";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { priorityToColor } from "../helpers";
-import { toggleCompletedTask } from "../taskSlice";
-import { Task, TaskPriority } from "../types";
+import { priorityToColor } from "./helpers";
+import { toggleCompletedTask } from "./taskSlice";
+import { Task, TaskPriority } from "./types";
 
 import { useAppDispatch } from "~/core";
 import { colors } from "~/ui";
 
-export const Item = ({ task }: { task: Task }) => {
+export const TaskItem = ({ task }: { task: Task }) => {
   const [isChecked, setChecked] = useState(task.completed);
   const dispatch = useAppDispatch();
 

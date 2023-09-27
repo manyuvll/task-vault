@@ -1,19 +1,16 @@
-import { format } from "date-fns";
-import Checkbox from "expo-checkbox";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { ScrollView, StyleSheet } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Toast from "react-native-root-toast";
 
 import { SWIPE } from "./constants";
-import { Item } from "./item";
 import { LeftActions } from "./leftAction";
 import { RightActions } from "./rightAction";
+import { TaskItem } from "../taskItem";
 import { deleteTask } from "../taskSlice";
 
 import { useAppSelector, useAppDispatch, useBiometricAuth } from "~/core";
-import { colors, text } from "~/ui";
 
 export const List = () => {
   const taskList = useAppSelector((state) => state.taskList);
@@ -41,7 +38,7 @@ export const List = () => {
     };
 
   return (
-    <ScrollView style={style().container}>
+    <ScrollView style={style.container}>
       {taskList.map((task) => (
         <Swipeable
           key={task.id}
@@ -49,18 +46,16 @@ export const List = () => {
           onSwipeableOpen={handleOnSwipeableOpen(task.id)}
           renderRightActions={RightActions}
         >
-          <Item task={task} />
+          <TaskItem task={task} />
         </Swipeable>
       ))}
     </ScrollView>
   );
 };
 
-const style = (completed?: boolean) =>
-  StyleSheet.create({
-    container: {
-      height: "100%",
-      padding: 30,
-      // backgroundColor: colors.white,
-    },
-  });
+const style = StyleSheet.create({
+  container: {
+    height: "100%",
+    padding: 30,
+  },
+});
