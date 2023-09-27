@@ -24,18 +24,20 @@ export const List = () => {
       // check if biometrics are working
       if (!isBiometricAvailable) {
         // show a helper message
-        Toast.show("Device biometrics not working.", {
+        Toast.show("Device biometrics not working correctly.", {
           duration: Toast.durations.LONG,
         });
+        return;
+      } else {
+        bioAuth().then((auth) => {
+          if (auth.success) {
+            if (direction === SWIPE.DELETE) dispatch(deleteTask(taskId));
+            else router.push("task/add");
+          }
+          // close the swiper at the end in any cases
+        });
       }
-      bioAuth().then((auth) => {
-        if (auth.success) {
-          if (direction === SWIPE.DELETE) dispatch(deleteTask(taskId));
-          else router.push("task/add");
-        }
-        // close the swiper at the end in any cases
-        swipeable.close();
-      });
+      swipeable.close();
     };
 
   return (

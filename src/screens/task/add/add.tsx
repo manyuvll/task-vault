@@ -12,6 +12,7 @@ import uuid from "react-native-uuid";
 import { addTask } from "../taskSlice";
 import { Task, TaskPriority } from "../types";
 
+import { useBiometricAuth } from "~/core/hooks";
 import { useAppDispatch } from "~/core/hooks/useAppDispatch";
 import { Button, Input } from "~/ui/core";
 import { colors } from "~/ui/themes";
@@ -29,6 +30,7 @@ const DEFAULT_VALUES: AddTaskForm = {
 };
 
 export const Add = () => {
+  const [isBiometricAvailable, bioAuth] = useBiometricAuth();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const today = new Date();
@@ -53,10 +55,24 @@ export const Add = () => {
       completed: false,
     };
     try {
-      dispatch(addTask(task));
-      router.push("task/list");
-      // reset form after redirect
-      resetForm();
+      if (!isBiometricAvailable) {
+        // show a helper message
+        Toast.show("Device biometrics not working correctly.", {
+          duration: Toast.durations.LONG,
+        });
+        // no need to go at the next action
+        return;
+      }
+      bioAuth().then((auth) => {
+        if (auth.success) {
+          dispatch(addTask(task));
+          router.push("task/list");
+          // reset form after redirect
+          resetForm();
+        } else {
+          Toast.show("No permissions to perform this action.");
+        }
+      });
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_) {
       Toast.show("Error during the creation");
