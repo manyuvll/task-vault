@@ -3,8 +3,9 @@ import Checkbox from "expo-checkbox";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import { priorityToColor } from "../helpers";
 import { toggleCompletedTask } from "../taskSlice";
-import { Task } from "../types";
+import { Task, TaskPriority } from "../types";
 
 import { useAppDispatch } from "~/core";
 import { colors } from "~/ui";
@@ -27,18 +28,18 @@ export const Item = ({ task }: { task: Task }) => {
           color={colors.indigo[500]}
         />
         <View>
-          <Text style={style().label}>{task.label}</Text>
+          <Text style={style(task.completed).label}>{task.label}</Text>
           <Text style={style().date}>
             {format(new Date(task.date), "yy MMM d")}
           </Text>
         </View>
       </View>
-      <View style={style(task.completed).status} />
+      <View style={style(task.completed, task.priority).status} />
     </View>
   );
 };
 
-const style = (completed?: boolean) =>
+const style = (completed?: boolean, priority?: TaskPriority) =>
   StyleSheet.create({
     task: {
       backgroundColor: colors.white,
@@ -59,7 +60,8 @@ const style = (completed?: boolean) =>
       fontSize: 16,
       lineHeight: 28,
       fontWeight: "700",
-      color: colors.slate[900],
+      textDecorationLine: completed ? "line-through" : "none",
+      color: completed ? colors.slate[400] : colors.slate[900],
     },
     date: {
       fontSize: 10,
@@ -69,7 +71,7 @@ const style = (completed?: boolean) =>
     status: {
       height: 10,
       width: 10,
-      backgroundColor: completed ? colors.green[300] : colors.red[300],
+      backgroundColor: priorityToColor(priority),
       borderRadius: 50,
       marginHorizontal: 5,
     },
