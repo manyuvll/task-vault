@@ -38,7 +38,7 @@ export const List = () => {
     };
 
   return (
-    <ScrollView style={style.container}>
+    <ScrollView contentContainerStyle={style.scrollView}>
       {taskList.map((task) => (
         <Swipeable
           key={task.id}
@@ -54,8 +54,8 @@ export const List = () => {
 };
 
 const style = StyleSheet.create({
-  container: {
-    height: "100%",
-    padding: 30,
+  scrollView: {
+    paddingHorizontal: 30,
+    paddingBottom: 100,
   },
 });

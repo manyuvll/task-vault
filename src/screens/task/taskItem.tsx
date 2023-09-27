@@ -42,10 +42,10 @@ export const TaskItem = ({ task }: { task: Task }) => {
 const style = (completed?: boolean, priority?: TaskPriority) =>
   StyleSheet.create({
     task: {
-      backgroundColor: colors.white,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
+      backgroundColor: colors.white,
       borderRadius: 8,
       padding: 4,
       margin: 3,

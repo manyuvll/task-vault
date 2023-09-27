@@ -1,11 +1,11 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Daypicker } from "~/ui";
+import { Home } from "~/screens";
 
 export default function Page() {
   return (
-    <SafeAreaView>
-      <Daypicker />
+    <SafeAreaView style={{ marginBottom: 100 }}>
+      <Home />
     </SafeAreaView>
   );
 }

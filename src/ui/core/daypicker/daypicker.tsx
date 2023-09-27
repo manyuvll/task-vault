@@ -4,14 +4,14 @@ import { ScrollView, Text, View } from "react-native";
 
 import { DAY_WIDTH, Day } from "./day";
 import { formatMonth } from "./helpers";
+import { DayPickerProps } from "./types";
 
 import { text } from "~/ui/themes";
 
 const DAY_PICKER_RANGE = 30;
 
-const Daypicker = () => {
+const Daypicker = ({ value, onChange }: DayPickerProps) => {
   const today = new Date();
-  const [selectedDay, setSelectedDay] = useState(today);
   const startOfDaypickerRange = useRef(subDays(today, DAY_PICKER_RANGE / 2));
 
   const [dates, setDates] = useState<Date[]>([]);
@@ -70,9 +70,9 @@ const Daypicker = () => {
         {dates.map((date) => (
           <Day
             key={date.toString()}
-            selected={selectedDay}
+            selected={value}
             date={date}
-            onSelectDate={setSelectedDay}
+            onSelectDate={onChange}
           />
         ))}
       </ScrollView>

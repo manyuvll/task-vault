@@ -2,19 +2,13 @@ import { format, isWeekend, isSameDay, getDate } from "date-fns";
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
+import { DayProps } from "./types";
+
 import { colors, shadows } from "~/ui/themes";
 
 export const DAY_WIDTH = 50;
 
-const Day = ({
-  date,
-  selected,
-  onSelectDate,
-}: {
-  date: Date;
-  selected: Date;
-  onSelectDate: (date: Date) => void;
-}) => {
+const Day = ({ date, selected, onSelectDate }: DayProps) => {
   // compare and check if selected
   const isSelected = isSameDay(selected, date);
 
