@@ -1,7 +1,10 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Redirect, Tabs } from "expo-router";
 import React from "react";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
+import { persistor, store } from "~/core";
 import { useAuth } from "~/core/auth";
 import { Add, Item, colors } from "~/ui";
 
@@ -15,64 +18,68 @@ export default function AppLayout() {
   }
 
   return (
-    <Tabs
-      backBehavior="history"
-      sceneContainerStyle={{ backgroundColor: colors.indigo[100] }}
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }: { focused: boolean }) => (
-            <Item
-              label="home"
-              focused={focused}
-              icon={
-                <Ionicons
-                  name="home-outline"
-                  size={20}
-                  style={{
-                    color: focused ? colors.indigo[500] : colors.slate[500],
-                  }}
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Tabs
+          backBehavior="history"
+          sceneContainerStyle={{ backgroundColor: colors.indigo[100] }}
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Tabs.Screen
+            name="index"
+            options={{
+              tabBarShowLabel: false,
+              tabBarIcon: ({ focused }: { focused: boolean }) => (
+                <Item
+                  label="home"
+                  focused={focused}
+                  icon={
+                    <Ionicons
+                      name="home-outline"
+                      size={20}
+                      style={{
+                        color: focused ? colors.indigo[500] : colors.slate[500],
+                      }}
+                    />
+                  }
                 />
-              }
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="task/add"
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }: { focused: boolean }) => (
-            <Add focused={focused} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="task/list"
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }: { focused: boolean }) => (
-            <Item
-              label="List"
-              focused={focused}
-              icon={
-                <Ionicons
-                  name="list-circle-outline"
-                  size={20}
-                  style={{
-                    color: focused ? colors.indigo[500] : colors.slate[500],
-                  }}
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="task/add"
+            options={{
+              tabBarShowLabel: false,
+              tabBarIcon: ({ focused }: { focused: boolean }) => (
+                <Add focused={focused} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="task/list"
+            options={{
+              tabBarShowLabel: false,
+              tabBarIcon: ({ focused }: { focused: boolean }) => (
+                <Item
+                  label="List"
+                  focused={focused}
+                  icon={
+                    <Ionicons
+                      name="list-circle-outline"
+                      size={20}
+                      style={{
+                        color: focused ? colors.indigo[500] : colors.slate[500],
+                      }}
+                    />
+                  }
                 />
-              }
-            />
-          ),
-        }}
-      />
-    </Tabs>
+              ),
+            }}
+          />
+        </Tabs>
+      </PersistGate>
+    </Provider>
   );
 }

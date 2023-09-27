@@ -1,21 +1,33 @@
 import { SafeAreaView, Text } from "react-native";
 
-import { useAuth } from "~/core/auth";
+import { useAppDispatch } from "~/core/hooks/useAppDispatch";
+import { useAppSelector } from "~/core/hooks/useAppSelector";
+import { addTask, deleteTask } from "~/screens";
 import { Header } from "~/ui";
 
 export default function Page() {
-  const { signOut } = useAuth();
+  const task = useAppSelector((state) => state.taskList);
+  const dispatch = useAppDispatch();
   return (
     <SafeAreaView>
       <Header title="Task List" />
-
+      <Text onPress={() => console.log(task)}>List</Text>
       <Text
-        onPress={() => {
-          signOut();
-        }}
+        onPress={() =>
+          dispatch(
+            addTask({
+              id: "ddjns",
+              label: "Task1",
+              description: "This is a description",
+              date: new Date().toISOString(),
+              completed: false,
+            }),
+          )
+        }
       >
-        LIST
+        Add
       </Text>
+      <Text onPress={() => dispatch(deleteTask("ddjns"))}>Delete</Text>
     </SafeAreaView>
   );
 }

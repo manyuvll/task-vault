@@ -3,8 +3,13 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { addYears } from "date-fns";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Platform, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
+import uuid from "react-native-uuid";
 
+import { addTask } from "../taskSlice";
+import { Task } from "../types";
+
+import { useAppDispatch } from "~/core/hooks/useAppDispatch";
 import { Button, Input, colors } from "~/ui";
 
 interface AddTaskForm {
@@ -14,6 +19,8 @@ interface AddTaskForm {
 }
 
 export const Add = () => {
+  const dispatch = useAppDispatch();
+
   const today = new Date();
   const {
     control,
@@ -23,12 +30,17 @@ export const Add = () => {
     defaultValues: {
       label: "",
       description: "",
-      date: today,
+      date: new Date(),
     },
   });
-  const onSubmit = (data: AddTaskForm) => {
-    console.log("test");
-    console.log(data);
+  const onSubmit = (submittedTask: AddTaskForm) => {
+    const task: Task = {
+      ...submittedTask,
+      id: uuid.v4().toString(),
+      date: submittedTask.date.toISOString(),
+      completed: false,
+    };
+    dispatch(addTask(task));
   };
 
   return (
@@ -79,14 +91,17 @@ export const Add = () => {
           required: true,
         }}
         render={({ field: { onChange, value } }) => (
-          <DateTimePicker
-            value={value || today}
-            mode="date"
-            display={Platform.OS === "ios" ? "spinner" : "default"}
-            onChange={onChange}
-            maximumDate={addYears(today, 3)}
-            minimumDate={today}
-          />
+          <>
+            <Text>{value.toISOString()}</Text>
+            <DateTimePicker
+              value={value}
+              mode="date"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onChange={(_event, date) => onChange(date)}
+              maximumDate={addYears(today, 3)}
+              minimumDate={today}
+            />
+          </>
         )}
         name="date"
       />
