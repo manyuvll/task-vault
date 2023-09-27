@@ -4,7 +4,7 @@ import { Home } from "~/screens/home";
 
 export default function Page() {
   return (
-    <SafeAreaView style={{ marginBottom: 100 }}>
+    <SafeAreaView>
       <Home />
     </SafeAreaView>
   );

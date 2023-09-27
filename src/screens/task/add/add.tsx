@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Platform, StyleSheet, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import Toast from "react-native-root-toast";
 import uuid from "react-native-uuid";
 
@@ -80,67 +81,73 @@ export const Add = () => {
   };
 
   return (
-    <View style={style.container}>
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-          maxLength: 100,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <Input
-            label="Task title"
-            placeholder="Add a title"
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            requiredMessage={errors.label ? "This is required." : null}
-          />
-        )}
-        name="label"
-      />
+    <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+      <View style={style.container}>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+            maxLength: 100,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input
+              label="Task title"
+              placeholder="Add a title"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              requiredMessage={errors.label ? "This is required." : null}
+            />
+          )}
+          name="label"
+        />
 
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, value } }) => (
-          <Picker selectedValue={value} onValueChange={onChange}>
-            <Picker.Item label="Low Priority" value="low" />
-            <Picker.Item label="Medium Priority" value="medium" />
-            <Picker.Item label="High Priority" value="high" />
-          </Picker>
-        )}
-        name="priority"
-      />
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <Picker selectedValue={value} onValueChange={onChange}>
+              <Picker.Item label="Low Priority" value="low" />
+              <Picker.Item label="Medium Priority" value="medium" />
+              <Picker.Item label="High Priority" value="high" />
+            </Picker>
+          )}
+          name="priority"
+        />
 
-      <Controller
-        control={control}
-        rules={{
-          required: true,
-        }}
-        render={({ field: { onChange, value } }) => (
-          <DateTimePicker
-            value={value}
-            mode="date"
-            display={Platform.OS === "ios" ? "spinner" : "default"}
-            onChange={(_event, date) => onChange(date)}
-            maximumDate={addYears(today, 3)}
-            minimumDate={today}
-          />
-        )}
-        name="date"
-      />
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <DateTimePicker
+              value={value}
+              mode="date"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onChange={(_event, date) => onChange(date)}
+              maximumDate={addYears(today, 3)}
+              minimumDate={today}
+            />
+          )}
+          name="date"
+        />
 
-      <Button
-        title="Add"
-        onPress={handleSubmit(onSubmit)}
-        rightIcon={
-          <Ionicons name="paper-plane-outline" size={12} color={colors.white} />
-        }
-      />
-    </View>
+        <Button
+          title="Add"
+          onPress={handleSubmit(onSubmit)}
+          rightIcon={
+            <Ionicons
+              name="paper-plane-outline"
+              size={12}
+              color={colors.white}
+            />
+          }
+        />
+      </View>
+    </ScrollView>
   );
 };
 

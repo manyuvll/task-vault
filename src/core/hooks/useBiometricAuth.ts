@@ -2,22 +2,21 @@ import * as LocalAuthentication from "expo-local-authentication";
 import { useEffect, useState } from "react";
 
 const useBiometricAuth = (): [
-  boolean,
+  LocalAuthentication.AuthenticationType[],
   () => Promise<LocalAuthentication.LocalAuthenticationResult>,
 ] => {
-  const [isBiometricAvailable, setIsBiometricAvailable] = useState(false);
+  const [availableBiometricAuth, setAvailableBiometricAuth] = useState<
+    LocalAuthentication.AuthenticationType[]
+  >([]);
   useEffect(() => {
     (async () => {
-      const compatible = await LocalAuthentication.hasHardwareAsync();
-      setIsBiometricAvailable(compatible);
+      const type =
+        await LocalAuthentication.supportedAuthenticationTypesAsync();
+      setAvailableBiometricAuth(type);
     })();
   });
 
-  const bioAuth = () => {
-    return LocalAuthentication.authenticateAsync();
-  };
-
-  return [isBiometricAvailable, bioAuth];
+  return [availableBiometricAuth, LocalAuthentication.authenticateAsync];
 };
 
 export { useBiometricAuth };

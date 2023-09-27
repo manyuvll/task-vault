@@ -12,7 +12,7 @@ const Item = ({ label, icon, focused }: ItemProps) => {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        paddingTop: 16,
+        // paddingTop: 16,
         borderTopWidth: 2,
         borderTopColor: focused ? colors.indigo[500] : "transparent",
       }}
