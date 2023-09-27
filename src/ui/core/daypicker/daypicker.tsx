@@ -1,24 +1,25 @@
-import { subDays, addDays } from "date-fns";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 
 import { DAY_WIDTH, Day } from "./day";
-import { formatMonth } from "./helpers";
+import {
+  formatMonth,
+  generateDayPickerRange,
+  getFirstDayInRange,
+} from "./helpers";
 import { DayPickerProps } from "./types";
 
 import { text } from "~/ui/themes";
 
-const DAY_PICKER_RANGE = 30;
-
 const Daypicker = ({ value, onChange }: DayPickerProps) => {
-  const today = new Date();
-  const startOfDaypickerRange = useRef(subDays(today, DAY_PICKER_RANGE / 2));
-
-  const [dates, setDates] = useState<Date[]>([]);
   const [scrollPosition, setScrollPosition] = useState(0);
+  // using ref since these are supposed to not change or
+  // retrigger rerenderings
+  const dateRanges = useRef(generateDayPickerRange());
+  const firstDayInRange = useRef(getFirstDayInRange());
 
   const getCurrentScrolledMonth = useMemo(
-    () => formatMonth(startOfDaypickerRange.current, scrollPosition, DAY_WIDTH),
+    () => formatMonth(firstDayInRange.current, scrollPosition, DAY_WIDTH),
     [scrollPosition],
   );
 
@@ -27,25 +28,8 @@ const Daypicker = ({ value, onChange }: DayPickerProps) => {
   // to today
   const todayScrollOffset = {
     y: 0,
-    x: (DAY_PICKER_RANGE / 2) * DAY_WIDTH,
+    x: (dateRanges.current.length / 2) * DAY_WIDTH,
   };
-
-  const getDates = (today: Date) => {
-    let current = today;
-    const _dates = [];
-    // we add days until we reach the end date we set
-    // improvement is to dynamically load next and previous
-    // page by page for dynamic and better performances
-    for (let i = 1; i <= DAY_PICKER_RANGE; i++) {
-      _dates.push(current);
-      current = addDays(current, 1);
-    }
-    setDates(_dates);
-  };
-
-  useEffect(() => {
-    getDates(startOfDaypickerRange.current);
-  }, []);
 
   return (
     <View style={{ alignItems: "center", gap: 4 }}>
@@ -67,7 +51,7 @@ const Daypicker = ({ value, onChange }: DayPickerProps) => {
           // ...shadows.default,
         }}
       >
-        {dates.map((date) => (
+        {dateRanges.current.map((date) => (
           <Day
             key={date.toString()}
             selected={value}
