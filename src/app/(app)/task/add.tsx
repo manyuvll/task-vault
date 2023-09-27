@@ -1,8 +1,8 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { Header } from "react-native/Libraries/NewAppScreen";
 
 import { Add } from "~/screens/task";
+import { Header } from "~/ui/core";
 
 export default function Page() {
   return (

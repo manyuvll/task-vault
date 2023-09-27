@@ -11,6 +11,7 @@ import { TaskItem } from "../taskItem";
 import { deleteTask } from "../taskSlice";
 
 import { useAppSelector, useAppDispatch, useBiometricAuth } from "~/core/hooks";
+import { NoData } from "~/ui/core/noData";
 
 export const List = () => {
   const taskList = useAppSelector((state) => state.taskList);
@@ -39,16 +40,20 @@ export const List = () => {
 
   return (
     <ScrollView contentContainerStyle={style.scrollView}>
-      {taskList.map((task) => (
-        <Swipeable
-          key={task.id}
-          renderLeftActions={LeftActions}
-          onSwipeableOpen={handleOnSwipeableOpen(task.id)}
-          renderRightActions={RightActions}
-        >
-          <TaskItem task={task} />
-        </Swipeable>
-      ))}
+      {taskList.length ? (
+        taskList.map((task) => (
+          <Swipeable
+            key={task.id}
+            renderLeftActions={LeftActions}
+            onSwipeableOpen={handleOnSwipeableOpen(task.id)}
+            renderRightActions={RightActions}
+          >
+            <TaskItem task={task} />
+          </Swipeable>
+        ))
+      ) : (
+        <NoData label="No Tasks!" />
+      )}
     </ScrollView>
   );
 };
