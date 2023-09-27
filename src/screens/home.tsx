@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   scrollView: {
     gap: 10,
     paddingHorizontal: 30,
-    paddingBottom: 100,
+    paddingBottom: 140,
   },
   titleContainer: {
     flexDirection: "row",
