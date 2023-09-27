@@ -7,8 +7,8 @@ import { priorityToColor } from "./helpers";
 import { toggleCompletedTask } from "./taskSlice";
 import { Task, TaskPriority } from "./types";
 
-import { useAppDispatch } from "~/core";
-import { colors } from "~/ui";
+import { useAppDispatch } from "~/core/hooks";
+import { colors } from "~/ui/themes";
 
 export const TaskItem = ({ task }: { task: Task }) => {
   const [isChecked, setChecked] = useState(task.completed);

@@ -6,9 +6,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import SignInIllustration from "../../assets/sign-in-illustration-2.svg";
 
-import { useBiometricAuth, useTheme } from "~/core";
 import { useAuth } from "~/core/auth";
-import { Button, colors } from "~/ui";
+import { useTheme, useBiometricAuth } from "~/core/hooks";
+import { Button } from "~/ui/core";
+import { colors } from "~/ui/themes";
 
 export default function SignIn() {
   const { signIn } = useAuth();

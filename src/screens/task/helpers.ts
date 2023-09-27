@@ -1,6 +1,6 @@
 import { TaskPriority } from "./types";
 
-import { colors } from "~/ui";
+import { colors } from "~/ui/themes";
 
 export const priorityToColor = (priority: TaskPriority | undefined) => {
   switch (priority) {

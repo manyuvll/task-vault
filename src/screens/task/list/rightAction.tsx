@@ -1,6 +1,6 @@
 import { View, Animated, StyleSheet } from "react-native";
 
-import { colors } from "~/ui";
+import { colors } from "~/ui/themes";
 
 export const RightActions = () => {
   return (

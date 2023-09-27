@@ -1,6 +1,6 @@
 import { Animated, StyleSheet, View } from "react-native";
 
-import { colors } from "~/ui";
+import { colors } from "~/ui/themes";
 
 export const LeftActions = () => {
   return (

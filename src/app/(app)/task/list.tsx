@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native";
 
-import { List } from "~/screens";
-import { Header } from "~/ui";
+import { List } from "~/screens/task";
+import { Header } from "~/ui/core";
 
 export default function Page() {
   return (

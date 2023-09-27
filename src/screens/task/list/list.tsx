@@ -10,7 +10,7 @@ import { RightActions } from "./rightAction";
 import { TaskItem } from "../taskItem";
 import { deleteTask } from "../taskSlice";
 
-import { useAppSelector, useAppDispatch, useBiometricAuth } from "~/core";
+import { useAppSelector, useAppDispatch, useBiometricAuth } from "~/core/hooks";
 
 export const List = () => {
   const taskList = useAppSelector((state) => state.taskList);

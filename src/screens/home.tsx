@@ -4,9 +4,10 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { TaskItem } from "./task/taskItem";
 
-import { useAppSelector } from "~/core";
-import { Daypicker, colors } from "~/ui";
+import { useAppSelector } from "~/core/hooks";
+import { Daypicker } from "~/ui/core";
 import { NoData } from "~/ui/core/noData";
+import { colors } from "~/ui/themes";
 
 export const Home = () => {
   const taskList = useAppSelector((state) => state.taskList);

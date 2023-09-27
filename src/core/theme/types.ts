@@ -1,4 +1,4 @@
-import { colors } from "~/ui";
+import { colors } from "~/ui/themes";
 
 export interface Theme {
   colors: keyof typeof colors;

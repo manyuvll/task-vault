@@ -13,7 +13,8 @@ import { addTask } from "../taskSlice";
 import { Task, TaskPriority } from "../types";
 
 import { useAppDispatch } from "~/core/hooks/useAppDispatch";
-import { Button, Input, colors } from "~/ui";
+import { Button, Input } from "~/ui/core";
+import { colors } from "~/ui/themes";
 
 interface AddTaskForm {
   label: string;

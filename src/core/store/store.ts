@@ -11,7 +11,7 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import { taskReducer } from "~/screens";
+import { taskReducer } from "~/screens/task";
 
 const persistConfig = {
   key: "root",

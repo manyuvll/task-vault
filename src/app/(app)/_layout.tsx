@@ -4,9 +4,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-import { persistor, store } from "~/core";
 import { useAuth } from "~/core/auth";
-import { Add, Item, colors } from "~/ui";
+import { store, persistor } from "~/core/store";
+import { Add, Item } from "~/ui/core";
+import { colors } from "~/ui/themes";
 
 export default function AppLayout() {
   const { session } = useAuth();

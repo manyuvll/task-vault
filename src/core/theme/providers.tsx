@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 
 import { ThemeContext } from "./contexts";
 
-import { colors, text } from "~/ui";
+import { colors, text } from "~/ui/themes";
 
 // Define the default theme
 export const defaultTheme = {
