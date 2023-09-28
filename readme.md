@@ -19,7 +19,6 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -29,19 +28,23 @@
 <br />
 <div align="center">
   <a href="https://github.com/manyuvll/task-vault">
-    <img src="docs/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="docs/images/logo.png" alt="Logo" width="400" height="00" style="width: 450px; 
+height: 200px; 
+object-fit: cover;
+object-position: 40% 50%; ">
   </a>
 
 <h3 align="center">Task Vault</h3>
 
   <p align="center">
     Biometrically secured TODO list.
-    <br/>
-    - Add/Edit/Delete tasks 
-    - See tasks to do day by day
-    <br />  
+    <br />
+Add/Edit/Delete tasks      
+See tasks to do day by day
+    <br />
     <a href="https://github.com/manyuvll/task-vault/issues">Report Bug</a>
     <a href="https://github.com/manyuvll/task-vault/issues">Request Feature</a>
+
   </p>
 </div>
 
@@ -63,11 +66,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -88,7 +88,8 @@
 
 ### Built With
 
-- [![React][React.js]][React-url]
+- [![Expo][Expo]][Expo-url]
+- ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -165,5 +166,5 @@ Project Link: [https://github.com/manyuvll/task-vault](https://github.com/manyuv
 [swipeleft]: docs/images/swipeleft.png
 [swiperight]: docs/images/swiperight.png
 [add-edit]: docs/images/add-edit.png
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
+[Expo]: https://img.shields.io/badge/Expo-fff.svg?style=for-the-badge&logo=EXPO&labelColor=fff&logoColor=000
+[Expo-url]: https://expo.dev/
