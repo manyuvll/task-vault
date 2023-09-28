@@ -30,7 +30,7 @@
   <a href="https://github.com/manyuvll/task-vault">
     <img src="docs/images/logo.png" alt="Logo" style="
     width: 300px; 
-    height: 250px; 
+    height: 300px; 
     object-fit: cover;
     object-position: 40% 50%;">
   </a>
