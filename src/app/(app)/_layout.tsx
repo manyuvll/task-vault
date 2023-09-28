@@ -1,6 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Redirect, Tabs } from "expo-router";
 import React from "react";
+import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
@@ -23,7 +24,7 @@ export default function AppLayout() {
       <PersistGate loading={null} persistor={persistor}>
         <Tabs
           backBehavior="history"
-          sceneContainerStyle={{ backgroundColor: colors.indigo[100] }}
+          sceneContainerStyle={styles().container}
           screenOptions={{
             headerShown: false,
           }}
@@ -40,9 +41,7 @@ export default function AppLayout() {
                     <Ionicons
                       name="home-outline"
                       size={20}
-                      style={{
-                        color: focused ? colors.indigo[500] : colors.slate[500],
-                      }}
+                      style={styles(focused).icon}
                     />
                   }
                 />
@@ -88,9 +87,7 @@ export default function AppLayout() {
                     <Ionicons
                       name="list-circle-outline"
                       size={20}
-                      style={{
-                        color: focused ? colors.indigo[500] : colors.slate[500],
-                      }}
+                      style={styles(focused).icon}
                     />
                   }
                 />
@@ -102,3 +99,11 @@ export default function AppLayout() {
     </Provider>
   );
 }
+
+const styles = (focused?: boolean) =>
+  StyleSheet.create({
+    container: { backgroundColor: colors.indigo[100] },
+    icon: {
+      color: focused ? colors.indigo[500] : colors.slate[500],
+    },
+  });

@@ -150,7 +150,7 @@ export const TaskForm = () => {
 
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-      <View style={style.container}>
+      <View style={styles.container}>
         <Controller
           control={control}
           rules={{
@@ -192,7 +192,7 @@ export const TaskForm = () => {
           visible={modalVisible}
           onRequestClose={setModalVisible.toggle}
         >
-          <View style={style.modalView}>
+          <View style={styles.modalView}>
             <Controller
               control={control}
               rules={{
@@ -206,7 +206,7 @@ export const TaskForm = () => {
                   onChange={(_event, date) => {
                     onChange(date);
                   }}
-                  style={{ flex: 1 }}
+                  style={styles.calendar}
                   maximumDate={addYears(today.current, 3)}
                   minimumDate={today.current}
                 />
@@ -214,7 +214,7 @@ export const TaskForm = () => {
               name="date"
             />
 
-            <View style={style.modalActionContainer}>
+            <View style={styles.modalActionContainer}>
               <Button
                 title="Cancel"
                 variant="error"
@@ -248,7 +248,7 @@ export const TaskForm = () => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: "100%",
     borderRadius: 30,

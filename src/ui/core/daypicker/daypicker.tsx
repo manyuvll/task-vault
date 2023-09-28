@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { DAY_WIDTH, Day } from "./day";
 import {
@@ -32,7 +32,7 @@ const Daypicker = ({ value, onChange }: DayPickerProps) => {
   };
 
   return (
-    <View style={{ alignItems: "center", gap: 4 }}>
+    <View style={styles.container}>
       <Text style={text.heading}>{getCurrentScrolledMonth}</Text>
       <ScrollView
         contentOffset={todayScrollOffset}
@@ -41,15 +41,7 @@ const Daypicker = ({ value, onChange }: DayPickerProps) => {
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={100}
         onScroll={(e) => setScrollPosition(e.nativeEvent.contentOffset.x)}
-        style={{
-          // backgroundColor: colors.white,
-          padding: 6,
-          borderRadius: 18,
-          flexDirection: "row",
-          gap: 10,
-          overflow: "visible",
-          // ...shadows.default,
-        }}
+        style={styles.scrollview}
       >
         {dateRanges.current.map((date) => (
           <Day
@@ -63,5 +55,16 @@ const Daypicker = ({ value, onChange }: DayPickerProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: { alignItems: "center", gap: 4 },
+  scrollview: {
+    padding: 6,
+    borderRadius: 18,
+    flexDirection: "row",
+    gap: 10,
+    overflow: "visible",
+  },
+});
 
 export { Daypicker };

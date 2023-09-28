@@ -18,31 +18,17 @@ export const SignIn = () => {
 
   return (
     <>
-      <View style={{ flex: 1 }} />
+      <View style={styles.spacer} />
       <View style={styles.container}>
         <SignInIllustration style={styles.image} />
       </View>
-      <View
-        style={{
-          flex: 1,
-          gap: 8,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <View style={styles.textContainer}>
         <Text style={{ ...(text.giant as object) }}>
-          Innovative {"\n"}Task{" "}
-          <Text style={{ color: colors.indigo[500] }}>Vault</Text>
+          Innovative {"\n"}Task <Text style={styles.vault}>Vault</Text>
         </Text>
         <Text style={text.body}>Keep your life goals secure!</Text>
       </View>
-      <View
-        style={{
-          paddingHorizontal: 34,
-          justifyContent: "center",
-          paddingVertical: 20,
-        }}
-      >
+      <View style={styles.buttonContainer}>
         <Button
           title={bioAuthTypeToLabel(availableBiometricsAuth)}
           onPress={async () => {
@@ -64,14 +50,29 @@ export const SignIn = () => {
 };
 
 const styles = StyleSheet.create({
+  spacer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
   },
+  textContainer: {
+    flex: 1,
+    gap: 8,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  vault: { color: colors.indigo[500] },
   image: {
     // scale picture based on screen
     maxWidth: windowWidth * 0.8,
     aspectRatio: 1,
+  },
+  buttonContainer: {
+    paddingHorizontal: 34,
+    justifyContent: "center",
+    paddingVertical: 20,
   },
 });
