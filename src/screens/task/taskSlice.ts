@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { Task, TaskStore } from "./types";
 
-const initialState: TaskStore = {
+export const initialState: TaskStore = {
   taskList: [],
 };
 const taskSlice = createSlice({
