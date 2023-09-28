@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// Hook to simplify the flow of booleans
+// and reduce code duplication
 const useBoolean = (
   initialValue: boolean = false,
 ): [

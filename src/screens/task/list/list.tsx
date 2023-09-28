@@ -37,6 +37,7 @@ export const List = () => {
           if (auth.success) {
             if (direction === SWIPE.DELETE) dispatch(deleteTask(task.id));
             else {
+              // redirect and pass which task we want to edit
               router.push({
                 pathname: `/task/edit`,
                 params: { task: JSON.stringify(task) },
@@ -56,7 +57,13 @@ export const List = () => {
     }
     return taskList.filter(
       // filter by label or priority
-      (task) => task.label.includes(filter) || task.priority.includes(filter),
+      (task) => {
+        const filterLowerCased = filter.toLowerCase();
+        return (
+          task.label.toLowerCase().includes(filterLowerCased) ||
+          task.priority.toLowerCase().includes(filterLowerCased)
+        );
+      },
     );
   }, [taskList, filter]);
 

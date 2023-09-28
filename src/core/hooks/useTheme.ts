@@ -2,8 +2,10 @@ import { useContext } from "react";
 
 import { ThemeContext } from "../theme";
 
-export // Custom hook to access the theme context
-function useTheme() {
+// Custom hook for accessing the theme context.
+// In the context of this demo app, I haven't delved further into this feature.
+// However, theoretically, you could manage both light and dark modes
+export function useTheme() {
   const context = useContext(ThemeContext);
 
   if (!context) {
