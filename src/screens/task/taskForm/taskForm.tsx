@@ -15,7 +15,7 @@ import { Task, TaskFormProps } from "../types";
 import { useBiometricAuth, useBoolean } from "~/core/hooks";
 import { useAppDispatch } from "~/core/hooks/useAppDispatch";
 import { Button, Datepicker, Input } from "~/ui/core";
-import { colors, shadows } from "~/ui/themes";
+import { colors } from "~/ui/themes";
 
 export const TaskForm = () => {
   const [isBiometricAvailable, bioAuth] = useBiometricAuth();
