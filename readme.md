@@ -19,9 +19,9 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 <div align="left">
-  [![Issues][issues-shield]][issues-url]
-  [![LinkedIn][linkedin-shield]][linkedin-url]
-  <img alt="build" src="https://github.com/manyuvll/task-vault/actions/workflows/test.yml/badge.svg" />
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+<img alt="build" src="https://github.com/manyuvll/task-vault/actions/workflows/test.yml/badge.svg" />
 </div>
 <!-- PROJECT LOGO -->
 <br />
