@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
-import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import React, { useMemo, useState } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Toast from "react-native-root-toast";
 
@@ -12,6 +12,7 @@ import { deleteTask } from "../taskSlice";
 import { Task } from "../types";
 
 import { useAppSelector, useAppDispatch, useBiometricAuth } from "~/core/hooks";
+import { Input } from "~/ui/core";
 import { NoData } from "~/ui/core/noData";
 
 export const List = () => {
@@ -19,6 +20,7 @@ export const List = () => {
   const dispatch = useAppDispatch();
   const [isBiometricAvailable, bioAuth] = useBiometricAuth();
   const router = useRouter();
+  const [filter, setFilter] = useState("");
 
   const handleOnSwipeableOpen =
     (task: Task) => (direction: "left" | "right", swipeable: Swipeable) => {
@@ -30,6 +32,7 @@ export const List = () => {
         });
         return;
       } else {
+        // if available, request it
         bioAuth().then((auth) => {
           if (auth.success) {
             if (direction === SWIPE.DELETE) dispatch(deleteTask(task.id));
@@ -37,38 +40,69 @@ export const List = () => {
               router.push({
                 pathname: `/task/edit`,
                 params: { task: JSON.stringify(task) },
-              }); // Remove the braces in params
+              });
             }
           }
-          // close the swiper at the end in any cases
         });
       }
+      // close the swiper at the end in any cases
       swipeable.close();
     };
 
+  const taskListFiltered = useMemo(() => {
+    // if no filter, return
+    if (!filter) {
+      return taskList;
+    }
+    return taskList.filter(
+      // filter by label or priority
+      (task) => task.label.includes(filter) || task.priority.includes(filter),
+    );
+  }, [taskList, filter]);
+
   return (
-    <ScrollView contentContainerStyle={style.scrollView}>
-      {taskList.length ? (
-        taskList.map((task) => (
-          <Swipeable
-            key={task.id}
-            renderLeftActions={LeftActions}
-            onSwipeableOpen={handleOnSwipeableOpen(task)}
-            renderRightActions={RightActions}
-          >
-            <TaskItem task={task} />
-          </Swipeable>
-        ))
-      ) : (
-        <NoData label="No Tasks!" />
-      )}
-    </ScrollView>
+    <View>
+      <View style={styles.filterContainer}>
+        <View style={styles.inputContainer}>
+          <Input
+            label="Filter"
+            value={filter}
+            placeholder="Label or priority"
+            onChangeText={setFilter}
+          />
+        </View>
+      </View>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        {taskListFiltered.length ? (
+          taskListFiltered.map((task) => (
+            <Swipeable
+              key={task.id}
+              renderLeftActions={LeftActions}
+              onSwipeableOpen={handleOnSwipeableOpen(task)}
+              renderRightActions={RightActions}
+            >
+              <TaskItem task={task} />
+            </Swipeable>
+          ))
+        ) : (
+          <NoData label="No Tasks!" />
+        )}
+      </ScrollView>
+    </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
+  filterContainer: {
+    gap: 10,
+    flexDirection: "row",
+    width: "100%",
+    paddingHorizontal: 33,
+    paddingBottom: 10,
+  },
+  inputContainer: { flex: 1 },
   scrollView: {
     paddingHorizontal: 30,
-    paddingBottom: 100,
+    paddingBottom: 300,
   },
 });

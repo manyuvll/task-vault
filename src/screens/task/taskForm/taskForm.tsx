@@ -39,7 +39,6 @@ export const TaskForm = () => {
     if (params.task) {
       // Parse JSON data from 'params.task' and ensure it's of type 'Task'
       taskToEdit.current = JSON.parse(params.task as string) as Task;
-
       // Create a new object with the parsed data and convert the 'date' property to a Date object
       const editedTask: TaskFormProps = {
         ...taskToEdit.current,
@@ -61,6 +60,7 @@ export const TaskForm = () => {
     formState: { errors },
     reset,
   } = useForm<TaskFormProps>({ mode: "onChange" });
+
   const label = useWatch({ control, name: "label" });
 
   const resetForm = (task?: TaskFormProps) => {
@@ -156,7 +156,6 @@ export const TaskForm = () => {
         return "This field is required.";
     }
   };
-
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       <View style={styles.container}>
@@ -181,7 +180,6 @@ export const TaskForm = () => {
           )}
           name="label"
         />
-
         <Controller
           control={control}
           rules={{
@@ -196,7 +194,6 @@ export const TaskForm = () => {
           )}
           name="priority"
         />
-
         <Modal
           animationType="slide"
           transparent
@@ -224,7 +221,6 @@ export const TaskForm = () => {
               )}
               name="date"
             />
-
             <View style={styles.modalActionContainer}>
               <Button
                 title="Cancel"
@@ -245,7 +241,6 @@ export const TaskForm = () => {
             </View>
           </View>
         </Modal>
-
         <Button
           title="When?"
           disabled={!label || Boolean(errors.label)}
