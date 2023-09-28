@@ -19,8 +19,6 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
@@ -152,12 +150,6 @@ Project Link: [https://github.com/manyuvll/task-vault](https://github.com/manyuv
 
 app icon from <a href="https://www.freepik.com/free-photo/3d-illustration-pen-putting-blue-ticks-paper_33062183.htm#query=todo&position=3&from_view=search&track=sph">Image by upklyak</a> on Freepik
 
-[contributors-shield]: https://img.shields.io/github/contributors/manyuvll/task-vault.svg?style=for-the-badge
-[contributors-url]: https://github.com/manyuvll/task-vault/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/manyuvll/task-vault.svg?style=for-the-badge
-[forks-url]: https://github.com/manyuvll/task-vault/network/members
-[stars-shield]: https://img.shields.io/github/stars/manyuvll/task-vault.svg?style=for-the-badge
-[stars-url]: https://github.com/manyuvll/task-vault/stargazers
 [issues-shield]: https://img.shields.io/github/issues/manyuvll/task-vault.svg?style=for-the-badge
 [issues-url]: https://github.com/manyuvll/task-vault/issues
 [license-shield]: https://img.shields.io/github/license/manyuvll/task-vault.svg?style=for-the-badge
