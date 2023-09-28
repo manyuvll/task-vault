@@ -17,7 +17,10 @@ export const Input = ({
   return (
     <View>
       <View style={styles.labelContainer}>
-        <Text style={styles.label}>{label}</Text>
+        <Text style={styles.label}>
+          <Text style={styles.error}>*</Text>
+          {label}
+        </Text>
         {requiredMessage && (
           <Text style={styles.error}>*{requiredMessage}</Text>
         )}

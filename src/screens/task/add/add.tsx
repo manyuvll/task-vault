@@ -1,11 +1,19 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { Picker } from "@react-native-picker/picker";
+import { Picker, PickerIOS } from "@react-native-picker/picker";
 import { addYears } from "date-fns";
 import { useRouter } from "expo-router";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Platform, StyleSheet, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { Controller, useForm, useWatch } from "react-hook-form";
+import {
+  Alert,
+  Modal,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Toast from "react-native-root-toast";
 import uuid from "react-native-uuid";
@@ -13,10 +21,10 @@ import uuid from "react-native-uuid";
 import { addTask } from "../taskSlice";
 import { Task, TaskPriority } from "../types";
 
-import { useBiometricAuth } from "~/core/hooks";
+import { useBiometricAuth, useBoolean } from "~/core/hooks";
 import { useAppDispatch } from "~/core/hooks/useAppDispatch";
 import { Button, Input } from "~/ui/core";
-import { colors } from "~/ui/themes";
+import { colors, shadows } from "~/ui/themes";
 
 interface AddTaskForm {
   label: string;
@@ -24,28 +32,30 @@ interface AddTaskForm {
   date: Date;
 }
 
-const DEFAULT_VALUES: AddTaskForm = {
-  label: "",
-  priority: "medium",
-  date: new Date(),
-};
-
 export const Add = () => {
   const [isBiometricAvailable, bioAuth] = useBiometricAuth();
+  const [modalVisible, setModalVisible] = useBoolean(false);
+
   const router = useRouter();
+  const today = useRef(new Date());
+  const defaultValues = useRef<AddTaskForm>({
+    label: "",
+    priority: "medium",
+    date: new Date(),
+  });
   const dispatch = useAppDispatch();
-  const today = new Date();
   const {
     control,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<AddTaskForm>({
-    defaultValues: DEFAULT_VALUES,
+    defaultValues: defaultValues.current,
   });
+  const label = useWatch({ control, name: "label" });
 
   const resetForm = () => {
-    reset(DEFAULT_VALUES);
+    reset(defaultValues.current);
   };
 
   const onSubmit = (submittedTask: AddTaskForm) => {
@@ -56,6 +66,7 @@ export const Add = () => {
       completed: false,
     };
     try {
+      setModalVisible.off();
       if (!isBiometricAvailable) {
         // show a helper message
         Toast.show("Device biometrics not working correctly.", {
@@ -96,6 +107,7 @@ export const Add = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              required
               requiredMessage={errors.label ? "This is required." : null}
             />
           )}
@@ -117,33 +129,61 @@ export const Add = () => {
           name="priority"
         />
 
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, value } }) => (
-            <DateTimePicker
-              value={value}
-              mode="date"
-              display={Platform.OS === "ios" ? "spinner" : "default"}
-              onChange={(_event, date) => onChange(date)}
-              maximumDate={addYears(today, 3)}
-              minimumDate={today}
+        <Modal
+          animationType="slide"
+          transparent
+          visible={modalVisible}
+          onRequestClose={setModalVisible.toggle}
+        >
+          <View style={style.modalView}>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, value } }) => (
+                <DateTimePicker
+                  value={value}
+                  mode="date"
+                  display={Platform.OS === "ios" ? "inline" : "default"}
+                  onChange={(_event, date) => {
+                    onChange(date);
+                  }}
+                  style={{ flex: 1 }}
+                  maximumDate={addYears(today.current, 3)}
+                  minimumDate={today.current}
+                />
+              )}
+              name="date"
             />
-          )}
-          name="date"
-        />
+
+            <View style={style.modalActionContainer}>
+              <Button
+                title="Cancel"
+                variant="error"
+                onPress={setModalVisible.off}
+              />
+              <Button
+                title="Create"
+                onPress={handleSubmit(onSubmit)}
+                rightIcon={
+                  <Ionicons
+                    name="calendar-outline"
+                    size={16}
+                    color={colors.white}
+                  />
+                }
+              />
+            </View>
+          </View>
+        </Modal>
 
         <Button
-          title="Add"
-          onPress={handleSubmit(onSubmit)}
+          title="When?"
+          disabled={!label}
+          onPress={setModalVisible.on}
           rightIcon={
-            <Ionicons
-              name="paper-plane-outline"
-              size={12}
-              color={colors.white}
-            />
+            <Ionicons name="calendar-outline" size={16} color={colors.white} />
           }
         />
       </View>
@@ -159,5 +199,22 @@ const style = StyleSheet.create({
     padding: 40,
     backgroundColor: colors.white,
   },
-  input: {},
+  modalView: {
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    alignItems: "center",
+    shadowColor: colors.indigo[500],
+    ...shadows.default,
+    elevation: 5,
+    minHeight: 600,
+  },
+  calendar: {
+    flex: 1,
+  },
+  modalActionContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
 });
