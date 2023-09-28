@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Platform, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { DAY_WIDTH, Day } from "./day";
 import {
@@ -63,7 +63,9 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     flexDirection: "row",
     gap: 10,
-    overflow: "visible",
+    // "visible" on ios will render a better shadow
+    // on android will stop scrolling so I set it as scroll
+    overflow: Platform.OS === "ios" ? "visible" : "scroll",
   },
 });
 
