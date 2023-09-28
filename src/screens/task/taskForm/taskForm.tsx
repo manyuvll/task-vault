@@ -18,7 +18,7 @@ import { Button, Datepicker, Input } from "~/ui/core";
 import { colors } from "~/ui/themes";
 
 export const TaskForm = () => {
-  const [isBiometricAvailable, bioAuth] = useBiometricAuth();
+  const [bioAuthInfo, bioAuth] = useBiometricAuth();
   const [modalVisible, setModalVisible] = useBoolean(false);
   const params = useGlobalSearchParams();
   const taskToEdit = useRef<Task | null>(null);
@@ -93,18 +93,13 @@ export const TaskForm = () => {
     router.push("task/list");
   };
 
-  const handleCreationError = () => {
-    // Show an error message in case of any unexpected errors
-    Toast.show("Error during the creation");
-  };
-
   const onSubmit = (submittedTask: TaskFormProps) => {
     try {
       // Close the modal if it's open
       setModalVisible.off();
 
       // Check if device biometrics are available
-      if (!isBiometricAvailable) {
+      if (!bioAuthInfo.isAvailable) {
         handleBiometricsUnavailable();
         return;
       }
@@ -143,7 +138,8 @@ export const TaskForm = () => {
       });
     } catch (err) {
       console.log(err);
-      handleCreationError();
+      // Show an error message in case of any unexpected errors
+      Toast.show("Error, try again.");
     }
   };
 

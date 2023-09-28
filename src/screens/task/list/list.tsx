@@ -18,14 +18,14 @@ import { NoData } from "~/ui/core/noData";
 export const List = () => {
   const taskList = useAppSelector((state) => state.taskList);
   const dispatch = useAppDispatch();
-  const [isBiometricAvailable, bioAuth] = useBiometricAuth();
+  const [bioAuthInfo, bioAuth] = useBiometricAuth();
   const router = useRouter();
   const [filter, setFilter] = useState("");
 
   const handleOnSwipeableOpen =
     (task: Task) => (direction: "left" | "right", swipeable: Swipeable) => {
       // check if biometrics are working
-      if (!isBiometricAvailable) {
+      if (!bioAuthInfo.isAvailable) {
         // show a helper message
         Toast.show("Device biometrics not working correctly.", {
           duration: Toast.durations.LONG,
@@ -43,6 +43,8 @@ export const List = () => {
                 params: { task: JSON.stringify(task) },
               });
             }
+          } else {
+            Toast.show("You have no permissions to perform this action.");
           }
         });
       }
