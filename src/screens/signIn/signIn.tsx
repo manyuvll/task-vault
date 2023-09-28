@@ -15,7 +15,7 @@ import { colors, windowWidth } from "~/ui/themes";
 export const SignIn = () => {
   const { signIn } = useAuth();
   const { text } = useTheme();
-  const [availableBiometricsAuth, bioAuth, errorMapping] = useBiometricAuth();
+  const [authInfo, bioAuth, errorMapping] = useBiometricAuth();
 
   return (
     <>
@@ -31,9 +31,9 @@ export const SignIn = () => {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          title={bioAuthTypeToLabel(availableBiometricsAuth)}
+          title={bioAuthTypeToLabel(authInfo.biometrics, authInfo.security)}
           onPress={async () => {
-            if (availableBiometricsAuth?.length) {
+            if (authInfo.isAvailable) {
               bioAuth().then((biometricResult) => {
                 if (biometricResult.success) {
                   signIn("user-session").then(() => {
@@ -45,7 +45,7 @@ export const SignIn = () => {
                     errorMapping.get(biometricResult.error) ??
                     // if not throw a generic error
                     // we could do a error service to make it more elegant
-                    "Issue with biometrics or pin";
+                    "Issue with your authentification.";
                   Toast.show(errorMessage, {
                     position: 1,
                   });
