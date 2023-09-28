@@ -3,12 +3,8 @@ import RNDateTimePicker, {
   DateTimePickerAndroid,
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { visible } from "chalk";
-import { addYears, format } from "date-fns";
-import { title } from "process";
 import React, { useEffect } from "react";
-import { Controller } from "react-hook-form";
-import { Modal, View, Platform, StyleSheet, Text } from "react-native";
+import { Modal, View, Platform, StyleSheet } from "react-native";
 
 import { Button } from "../button";
 

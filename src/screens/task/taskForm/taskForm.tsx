@@ -239,22 +239,4 @@ const styles = StyleSheet.create({
     padding: 40,
     backgroundColor: colors.white,
   },
-  modalView: {
-    padding: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    alignItems: "center",
-    shadowColor: colors.indigo[500],
-    ...shadows.default,
-    elevation: 5,
-    minHeight: 600,
-  },
-  calendar: {
-    flex: 1,
-  },
-  modalActionContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-  },
 });
