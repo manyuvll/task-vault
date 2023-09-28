@@ -67,6 +67,7 @@ See tasks to do day by day
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
+    <li><a href="#packages">Packages</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -86,16 +87,6 @@ Some features:
   </ul>
 
   <br/>
-
-Stack:
-
-  <ul>
-    <li>Expo </li>
-    <li>Auth: expo-local-authentication</li>
-    <li>UI: react-native-root-toast</li>
-    <li>Swipe left/right to edit/delete</li>
-    <li>Customized bottom Tabs</li>
-  </ul>
 
 <div>
 
