@@ -156,7 +156,6 @@ export const TaskForm = () => {
         return "This field is required.";
     }
   };
-  console.log(errors.label);
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
