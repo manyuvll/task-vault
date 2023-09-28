@@ -35,8 +35,6 @@
     object-position: 40% 50%;">
   </a>
 
-<h3 align="center">Task Vault</h3>
-
   <p align="center">
     Biometrically secured TODO list.
     <br />
