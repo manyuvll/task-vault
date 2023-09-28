@@ -136,7 +136,7 @@ If not already done, activate yarn by running this command:
 
 ## Usage
 
-This app is optimized for iOS primarly.
+App tested on: iphone 14 pro, iphone 8 and google pixel 3a.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
