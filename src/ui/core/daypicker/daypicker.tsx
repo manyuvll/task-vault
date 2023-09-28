@@ -37,7 +37,6 @@ const Daypicker = ({ value, onChange }: DayPickerProps) => {
       <ScrollView
         contentOffset={todayScrollOffset}
         horizontal
-        pagingEnabled
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={100}
         onScroll={(e) => setScrollPosition(e.nativeEvent.contentOffset.x)}
