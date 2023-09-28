@@ -81,8 +81,6 @@
 [![swiperight][swiperight]](docs/images/swiperight.png)
 [![add-edit][add-edit]](docs/images/add-edit.png)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
@@ -164,6 +162,10 @@ Project Link: [https://github.com/manyuvll/task-vault](https://github.com/manyuv
 [license-url]: https://github.com/manyuvll/task-vault/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/emanuele-vella/
-[product-screenshot]: images/screenshot.png
+[login]: docs/images/login.png
+[home]: docs/images/home.png
+[swipeleft]: docs/images/swipeleft.png
+[swiperight]: docs/images/swiperight.png
+[add-edit]: docs/images/add-edit.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
