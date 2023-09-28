@@ -39,9 +39,8 @@
   <p align="center">
     Biometrically secured TODO list.
     <br />
-Add/Edit/Delete tasks      
-See tasks to do day by day 
-    <br />
+Add, edit, or delete tasks. <br />
+View tasks organized by day <br />
     <a href="https://github.com/manyuvll/task-vault/issues">Report Bug</a>
     <a href="https://github.com/manyuvll/task-vault/issues">Request Feature</a>
 
