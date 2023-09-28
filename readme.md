@@ -85,6 +85,18 @@ Some features:
     <li>Customized bottom Tabs</li>
   </ul>
 
+  <br/>
+
+Stack:
+
+  <ul>
+    <li>Expo </li>
+    <li>Auth: expo-local-authentication</li>
+    <li>UI: react-native-root-toast</li>
+    <li>Swipe left/right to edit/delete</li>
+    <li>Customized bottom Tabs</li>
+  </ul>
+
 <div>
 
 <p align="center">
@@ -158,6 +170,77 @@ Project Link: [https://github.com/manyuvll/task-vault](https://github.com/manyuv
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+## Packages
+
+UI:
+
+<ul>
+  <li>@react-native-community/datetimepicker</li>
+  <li>@react-native-picker/picker</li>
+  <li>expo</li>
+  <li>expo-checkbox</li>
+  <li>expo-constants</li>
+  <li>expo-router</li>
+  <li>expo-splash-screen</li>
+  <li>expo-status-bar</li>
+  <li>react-native-gesture-handler</li>
+  <li>react-native-root-toast</li>
+  <li>react-native-safe-area-context</li>
+  <li>react-native-screens</li>
+  <li>react-native-svg</li>
+  <li>react-native-uuid</li>
+</ul>
+Storage:
+
+<ul>
+  <li>@react-native-async-storage/async-storage</li>
+  <li>expo-secure-store</li>
+  <li>redux-persist</li>
+</ul>
+Authentication:
+
+<ul>
+  <li>expo-local-authentication</li>
+</ul>
+State Management:
+
+<ul>
+  <li>@reduxjs/toolkit</li>
+</ul>
+Date and Time:
+
+<ul>
+  <li>date-fns</li>
+</ul>
+Testing:
+
+<ul>
+  <li>jest</li>
+  <li>jest-expo</li>
+</ul>
+React and Related:
+
+<ul>
+  <li>react</li>
+  <li>react-hook-form</li>
+  <li>react-native</li>
+  <li>react-redux</li>
+</ul>
+TypeScript and Linting:
+
+<ul>
+  <li>@babel/core</li>
+  <li>@types/jest</li>
+  <li>@types/react</li>
+  <li>@types/react-test-renderer</li>
+  <li>@typescript-eslint/eslint-plugin</li>
+  <li>@typescript-eslint/parser</li>
+  <li>eslint</li>
+  <li>eslint-config-universe</li>
+  <li>prettier</li>
+  <li>typescript</li>
+</ul>
 
 ## Credits
 
