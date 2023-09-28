@@ -2,6 +2,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import Toast from "react-native-root-toast";
 
 import { bioAuthTypeToLabel } from "./helpers";
 import SignInIllustration from "../../../assets/sign-in-illustration-2.svg";
@@ -14,7 +15,7 @@ import { colors, windowWidth } from "~/ui/themes";
 export const SignIn = () => {
   const { signIn } = useAuth();
   const { text } = useTheme();
-  const [availableBiometricsAuth, bioAuth] = useBiometricAuth();
+  const [availableBiometricsAuth, bioAuth, errorMapping] = useBiometricAuth();
 
   return (
     <>
@@ -34,9 +35,20 @@ export const SignIn = () => {
           onPress={async () => {
             if (availableBiometricsAuth?.length) {
               bioAuth().then((biometricResult) => {
+                console.log(biometricResult);
                 if (biometricResult.success) {
-                  signIn("user-session-2").then(() => {
+                  signIn("user-session").then(() => {
                     router.replace("/");
+                  });
+                } else {
+                  // check in map if we covered the error mapping
+                  const errorMessage =
+                    errorMapping.get(biometricResult.error) ??
+                    // if not throw a generic error
+                    // we could do a error service to make it more elegant
+                    "Issue with biometrics or pin";
+                  Toast.show(errorMessage, {
+                    position: 1,
                   });
                 }
               });

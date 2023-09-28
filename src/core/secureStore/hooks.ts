@@ -27,8 +27,8 @@ export function useStorageState(
 
   const setValue = React.useCallback(
     (value: string | null): Promise<void> => {
-      // this is needed so that we can redirect after the session is stored
-      // not doing this will make the app be redirected back to sign-in page
+      // Promise is needed so that we can redirect after has been stored.
+      // Omitting this would result in the app being redirected back to the sign-in page
       return new Promise(async (resolve, reject) => {
         try {
           setStorageItemAsync(key, value).then(() => {
@@ -37,8 +37,6 @@ export function useStorageState(
             resolve();
           });
         } catch (error) {
-          // Handle any errors that occurred during the storage operation.
-          console.error("Error setting storage item:", error);
           reject(error); // Reject the Promise if there's an error.
         }
       });

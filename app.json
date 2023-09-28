@@ -19,14 +19,19 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.emanuele.vella.task-vault",
       "infoPlist": {
-        "NSFaceIDUsageDescription": "Allow $(PRODUCT_NAME) to use FaceID"
+        "NSFaceIDUsageDescription": "Allow $(PRODUCT_NAME) to use Face ID."
       }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ],
+      "package": "com.emanuele.vella.android.task.vault"
     },
     "web": {
       "favicon": "./assets/favicon.png"

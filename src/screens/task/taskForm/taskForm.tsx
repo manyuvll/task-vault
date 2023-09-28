@@ -1,11 +1,10 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import { addYears } from "date-fns";
 import { useGlobalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
 import { Controller, FieldError, useForm, useWatch } from "react-hook-form";
-import { Modal, Platform, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Toast from "react-native-root-toast";
 import uuid from "react-native-uuid";
@@ -15,7 +14,7 @@ import { Task, TaskFormProps } from "../types";
 
 import { useBiometricAuth, useBoolean } from "~/core/hooks";
 import { useAppDispatch } from "~/core/hooks/useAppDispatch";
-import { Button, Input } from "~/ui/core";
+import { Button, Datepicker, Input } from "~/ui/core";
 import { colors, shadows } from "~/ui/themes";
 
 export const TaskForm = () => {
@@ -156,6 +155,7 @@ export const TaskForm = () => {
         return "This field is required.";
     }
   };
+
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       <View style={styles.container}>
@@ -180,6 +180,7 @@ export const TaskForm = () => {
           )}
           name="label"
         />
+
         <Controller
           control={control}
           rules={{
@@ -194,53 +195,28 @@ export const TaskForm = () => {
           )}
           name="priority"
         />
-        <Modal
-          animationType="slide"
-          transparent
-          visible={modalVisible}
-          onRequestClose={setModalVisible.toggle}
-        >
-          <View style={styles.modalView}>
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field: { onChange, value } }) => (
-                <DateTimePicker
-                  value={value}
-                  mode="date"
-                  display={Platform.OS === "ios" ? "inline" : "default"}
-                  onChange={(_event, date) => {
-                    onChange(date);
-                  }}
-                  style={styles.calendar}
-                  maximumDate={addYears(today.current, 3)}
-                  minimumDate={today.current}
-                />
-              )}
-              name="date"
+
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <Datepicker
+              value={value || new Date()}
+              onRequestClose={setModalVisible.off}
+              visible={modalVisible}
+              onChange={onChange}
+              maximumDate={addYears(today.current, 3)}
+              minimumDate={today.current}
+              onClose={setModalVisible.off}
+              onSave={handleSubmit(onSubmit)}
+              saveLabel={taskToEdit.current ? "Edit" : "Create"}
             />
-            <View style={styles.modalActionContainer}>
-              <Button
-                title="Cancel"
-                variant="error"
-                onPress={setModalVisible.off}
-              />
-              <Button
-                title={taskToEdit.current ? "Edit" : "Create"}
-                onPress={handleSubmit(onSubmit)}
-                rightIcon={
-                  <Ionicons
-                    name="calendar-outline"
-                    size={16}
-                    color={colors.white}
-                  />
-                }
-              />
-            </View>
-          </View>
-        </Modal>
+          )}
+          name="date"
+        />
+
         <Button
           title="When?"
           disabled={!label || Boolean(errors.label)}

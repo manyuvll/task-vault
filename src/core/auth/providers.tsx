@@ -9,6 +9,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={{
         signIn: async (userSession) => {
+          console.log("signin");
           return setSession(userSession);
         },
         signOut: async () => {
