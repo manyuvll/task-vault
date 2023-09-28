@@ -4,7 +4,7 @@ import { Picker } from "@react-native-picker/picker";
 import { addYears } from "date-fns";
 import { useGlobalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { Controller, FieldError, useForm, useWatch } from "react-hook-form";
 import { Modal, Platform, StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Toast from "react-native-root-toast";
@@ -60,7 +60,7 @@ export const TaskForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<TaskFormProps>();
+  } = useForm<TaskFormProps>({ mode: "onChange" });
   const label = useWatch({ control, name: "label" });
 
   const resetForm = (task?: TaskFormProps) => {
@@ -148,14 +148,24 @@ export const TaskForm = () => {
     }
   };
 
+  const getInputErrorMessage = (error: FieldError) => {
+    switch (error.type) {
+      case "maxLength":
+        return "30 characters maximum.";
+      default:
+        return "This field is required.";
+    }
+  };
+  console.log(errors.label);
+
   return (
-    <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+    <ScrollView contentContainerStyle={styles.scrollView}>
       <View style={styles.container}>
         <Controller
           control={control}
           rules={{
             required: true,
-            maxLength: 100,
+            maxLength: 30,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <Input
@@ -164,8 +174,10 @@ export const TaskForm = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              requiredMessage={errors.label ? "This is required." : null}
               required
+              requiredMessage={
+                errors.label ? getInputErrorMessage(errors.label) : null
+              }
             />
           )}
           name="label"
@@ -221,7 +233,7 @@ export const TaskForm = () => {
                 onPress={setModalVisible.off}
               />
               <Button
-                title="Create"
+                title={taskToEdit.current ? "Edit" : "Create"}
                 onPress={handleSubmit(onSubmit)}
                 rightIcon={
                   <Ionicons
@@ -237,7 +249,7 @@ export const TaskForm = () => {
 
         <Button
           title="When?"
-          disabled={!label}
+          disabled={!label || Boolean(errors.label)}
           onPress={setModalVisible.on}
           rightIcon={
             <Ionicons name="calendar-outline" size={16} color={colors.white} />
@@ -249,6 +261,7 @@ export const TaskForm = () => {
 };
 
 const styles = StyleSheet.create({
+  scrollView: { paddingBottom: 100 },
   container: {
     height: "100%",
     borderRadius: 30,

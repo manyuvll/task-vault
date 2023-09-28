@@ -28,10 +28,11 @@
 <br />
 <div align="center">
   <a href="https://github.com/manyuvll/task-vault">
-    <img src="docs/images/logo.png" alt="Logo" width="400" height="00" style="width: 450px; 
-height: 200px; 
-object-fit: cover;
-object-position: 40% 50%; ">
+    <img src="docs/images/logo.png" alt="Logo" style="
+    width: 450px; 
+    height: 200px; 
+    object-fit: cover;
+    object-position: 40% 50%;">
   </a>
 
 <h3 align="center">Task Vault</h3>
