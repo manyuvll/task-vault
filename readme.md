@@ -37,7 +37,7 @@
     Biometrically secured TODO list.
     <br />
 Add/Edit/Delete tasks      
-See tasks to do day by day
+See tasks to do day by day 
     <br />
     <a href="https://github.com/manyuvll/task-vault/issues">Report Bug</a>
     <a href="https://github.com/manyuvll/task-vault/issues">Request Feature</a>
@@ -71,6 +71,16 @@ See tasks to do day by day
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
+
+Some features:
+
+  <ul>
+    <li>Create/Edit/Delete tasks</li>
+    <li>Biometrics for login/add/edit/delete</li>
+    <li>Day picker (will load around a month with the current day being in the middle)</li>
+    <li>Swipe left/right to edit/delete</li>
+    <li>Customized bottom Tabs</li>
+  </ul>
 
 <div>
 
