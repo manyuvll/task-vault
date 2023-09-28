@@ -12,13 +12,18 @@ import { colors, text } from "~/ui/themes";
 export const Input = ({
   label,
   requiredMessage,
+  required,
   ...rest
-}: TextInputProps & { label: string; requiredMessage?: string | null }) => {
+}: TextInputProps & {
+  label: string;
+  required?: boolean;
+  requiredMessage?: string | null;
+}) => {
   return (
     <View>
       <View style={styles.labelContainer}>
         <Text style={styles.label}>
-          <Text style={styles.error}>*</Text>
+          {required && <Text style={styles.error}>*</Text>}
           {label}
         </Text>
         {requiredMessage && (

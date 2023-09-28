@@ -14,7 +14,7 @@ const useBiometricAuth = (): [
         await LocalAuthentication.supportedAuthenticationTypesAsync();
       setAvailableBiometricAuth(type);
     })();
-  });
+  }, []);
 
   return [availableBiometricAuth, LocalAuthentication.authenticateAsync];
 };

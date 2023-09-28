@@ -51,7 +51,25 @@ export default function AppLayout() {
           />
           <Tabs.Screen
             name="task/add"
+            // ne to clear params, else we'll go always in edit mode
+            listeners={({ navigation }) => ({
+              blur: () => navigation.setParams({ task: undefined }),
+            })}
             options={{
+              tabBarShowLabel: false,
+              tabBarIcon: ({ focused }: { focused: boolean }) => (
+                <Add focused={focused} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="task/edit"
+            // ne to clear params, else we'll go always in edit mode
+            listeners={({ navigation }) => ({
+              blur: () => navigation.setParams({ task: undefined }),
+            })}
+            options={{
+              href: null,
               tabBarShowLabel: false,
               tabBarIcon: ({ focused }: { focused: boolean }) => (
                 <Add focused={focused} />

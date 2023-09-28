@@ -9,6 +9,7 @@ import { LeftActions } from "./leftAction";
 import { RightActions } from "./rightAction";
 import { TaskItem } from "../taskItem";
 import { deleteTask } from "../taskSlice";
+import { Task } from "../types";
 
 import { useAppSelector, useAppDispatch, useBiometricAuth } from "~/core/hooks";
 import { NoData } from "~/ui/core/noData";
@@ -20,7 +21,7 @@ export const List = () => {
   const router = useRouter();
 
   const handleOnSwipeableOpen =
-    (taskId: string) => (direction: "left" | "right", swipeable: Swipeable) => {
+    (task: Task) => (direction: "left" | "right", swipeable: Swipeable) => {
       // check if biometrics are working
       if (!isBiometricAvailable) {
         // show a helper message
@@ -31,8 +32,13 @@ export const List = () => {
       } else {
         bioAuth().then((auth) => {
           if (auth.success) {
-            if (direction === SWIPE.DELETE) dispatch(deleteTask(taskId));
-            else router.push("task/add");
+            if (direction === SWIPE.DELETE) dispatch(deleteTask(task.id));
+            else {
+              router.push({
+                pathname: `/task/edit`,
+                params: { task: JSON.stringify(task) },
+              }); // Remove the braces in params
+            }
           }
           // close the swiper at the end in any cases
         });
@@ -47,7 +53,7 @@ export const List = () => {
           <Swipeable
             key={task.id}
             renderLeftActions={LeftActions}
-            onSwipeableOpen={handleOnSwipeableOpen(task.id)}
+            onSwipeableOpen={handleOnSwipeableOpen(task)}
             renderRightActions={RightActions}
           >
             <TaskItem task={task} />

@@ -11,3 +11,11 @@ export interface TaskStore {
 }
 
 export type TaskPriority = "low" | "medium" | "high";
+
+export interface TaskFormProps {
+  id?: string;
+  label: string;
+  priority: TaskPriority;
+  date: Date;
+  completed?: boolean;
+}

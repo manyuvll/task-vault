@@ -7,7 +7,7 @@ import { Header } from "~/ui/core";
 export default function Page() {
   return (
     <SafeAreaView>
-      <Header title="Add a Task" />
+      <Header title="Edit a Task" />
       <TaskForm />
     </SafeAreaView>
   );
