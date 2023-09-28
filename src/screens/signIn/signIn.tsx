@@ -35,7 +35,6 @@ export const SignIn = () => {
           onPress={async () => {
             if (availableBiometricsAuth?.length) {
               bioAuth().then((biometricResult) => {
-                console.log(biometricResult);
                 if (biometricResult.success) {
                   signIn("user-session").then(() => {
                     router.replace("/");

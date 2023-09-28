@@ -5,9 +5,9 @@ import { AuthContextProps } from "./types";
 export const AuthContext = createContext<AuthContextProps>({
   session: null,
   signIn: async () => {
-    console.log("not-defined");
+    console.error("not-defined");
   },
   signOut: () => {
-    console.log("not-defined");
+    console.error("not-defined");
   },
 });

@@ -44,21 +44,26 @@ export const Datepicker = ({
       date?: Date | undefined,
     ) => {
       switch (event.type) {
+        // if cancel button pressed
         case "dismissed": {
           DateTimePickerAndroid.dismiss("date");
           onClose();
           break;
         }
+        // if ok button pressed
         case "set": {
           onChange(date);
-          console.log("onSave");
           onSave();
           break;
+        }
+        default: {
+          onClose();
         }
       }
     };
     if (visible) {
       DateTimePickerAndroid.open({
+        style: { backgroundColor: "red" },
         value,
         mode: "date",
         display: "default",
@@ -72,6 +77,7 @@ export const Datepicker = ({
   if (Platform.OS === "android") return null;
 
   return (
+    // create a modal to save space on iphone 8 and similar.
     <Modal
       animationType="slide"
       transparent
